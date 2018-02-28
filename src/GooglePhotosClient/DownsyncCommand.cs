@@ -86,7 +86,7 @@
                 }
             }
 
-            downloadClient.DownloadPhotos(photos, path, state =>
+            downloadClient.DownloadPhotos(download, path, state =>
             {
                 switch (state.Status)
                 {

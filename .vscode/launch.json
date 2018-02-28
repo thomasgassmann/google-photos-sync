@@ -10,10 +10,18 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/GooglePhotosClient/bin/Debug/netcoreapp2.0/GooglePhotosClient.dll",
-            "args": [],
+            "args": [
+                "ds",
+                "-c",
+                "client_secret.json",
+                "-b",
+                "\\\\nas\\files\\photos\\googlephotos",
+                "--since",
+                "2017-12-12"
+            ],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
