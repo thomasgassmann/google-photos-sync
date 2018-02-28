@@ -10,19 +10,8 @@
     {
         public static void Main(string[] args)
         {
-            args = new[]
-            {
-                "ds",
-                "-b",
-                "C:\\",
-                "-c",
-                "client_secret.json",
-                "--since",
-                "2017-12-12"
-            };
-
             C.Console.WriteAscii(General.Name);
-            var app = new CommandLineApplication
+            var app = new CommandLineApplication(false)
             {
                 Name = General.Name,
                 ShortVersionGetter = () => Assembly.GetEntryAssembly().ImageRuntimeVersion
@@ -56,8 +45,12 @@
                 x.HelpOption(CommandNames.Help);
             });
 
+            if (args.Length == 0) 
+            {
+                app.ShowHelp();
+            }
+
             app.Execute(args);
-            Console.ReadLine();
         }
     }
 }

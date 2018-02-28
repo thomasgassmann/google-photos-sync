@@ -109,7 +109,7 @@
             var defaultPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 ".credentials",
-                "GooglePhotosClientSecret.json");
+                "client_secret.json");
             return this.clientSecretSavePath.HasValue()
                 ? this.clientSecretSavePath.Value() ?? defaultPath
                 : defaultPath;
