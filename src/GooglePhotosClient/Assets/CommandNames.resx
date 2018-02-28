@@ -144,4 +144,10 @@
   <data name="Help" xml:space="preserve">
     <value>-?|-h|--help</value>
   </data>
+  <data name="SinceArgumentDescription" xml:space="preserve">
+    <value>Filter photos and videos since a specific date</value>
+  </data>
+  <data name="SinceArgumentTemplate" xml:space="preserve">
+    <value>--since</value>
+  </data>
 </root>

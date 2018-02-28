@@ -12,10 +12,11 @@
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using C = Colorful;
 
     public class DownloadClient
     {
-        internal static string[] Scopes = { DriveService.Scope.DrivePhotosReadonly };
+        internal static string[] Scopes = { DriveService.Scope.Drive, DriveService.Scope.DrivePhotosReadonly };
 
         private DriveService driveService;
 
@@ -27,8 +28,8 @@
 
         public DownloadClient(string clientSecretPath, string clientSecretSaveLocation)
         {
-            this.clientSecretSaveLocation = clientSecretSaveLocation;
             this.clientSecretPath = clientSecretPath;
+            this.clientSecretSaveLocation = clientSecretSaveLocation;
         }
 
         public ClientSecrets ClientSecret
@@ -80,7 +81,8 @@
         public void DownloadPhotos(IEnumerable<Google.Apis.Drive.v3.Data.File> files, string backupLocation, Action<IDownloadProgress> progressHandler)
         {
             var list = files.ToList();
-            Console.WriteLine($"Starting download of {list.Count} files.");
+            C.Console.WriteLine();
+            C.Console.WriteLine($"Starting download of {list.Count} files.");
             for (var i = 0; i < list.Count; i++)
             {
                 var request = this.DriveService.Files.Get(list[i].Id);
@@ -90,24 +92,29 @@
                     request.Download(stream);
                 }
 
-                Console.WriteLine($"Downloaded file {i} of {list.Count}.");
+                C.Console.WriteLine($"Downloaded file {i} of {list.Count}.");
             }
         }
 
-        public IEnumerable<Google.Apis.Drive.v3.Data.File> IteratePhotos()
+        public IEnumerable<Google.Apis.Drive.v3.Data.File> IteratePhotos(DateTime? since)
         {
             var nextPageToken = default(string);
+            var formattedSinceDate = since?.ToString(General.GoogleDriveDateFormat);
+            C.Console.WriteLine(General.Fetching);
             do
             {
                 var listRequest = this.DriveService.Files.List();
                 listRequest.PageSize = 100;
                 listRequest.Fields = "nextPageToken, files";
-                listRequest.Spaces = "photos";
+                listRequest.Spaces = "drive";
+                listRequest.Q = since.HasValue
+                    ? $"modifiedTime > '{formattedSinceDate}' and (mimeType contains 'image/' or mimeType contains 'video/')"
+                    : "(mimeType contains 'image/' or mimeType contains 'video/')";
                 listRequest.PageToken = nextPageToken;
                 var executedRequest = listRequest.Execute();
                 foreach (var file in executedRequest.Files)
                 {
-                    Console.WriteLine(file.Name);
+                    C.Console.Write("\r" + file.Name);
                     yield return file;
                 }
 

@@ -140,5 +140,23 @@ namespace GooglePhotosClient.Assets {
                 return ResourceManager.GetString("Help", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter photos and videos since a specific date.
+        /// </summary>
+        internal static string SinceArgumentDescription {
+            get {
+                return ResourceManager.GetString("SinceArgumentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --since.
+        /// </summary>
+        internal static string SinceArgumentTemplate {
+            get {
+                return ResourceManager.GetString("SinceArgumentTemplate", resourceCulture);
+            }
+        }
     }
 }

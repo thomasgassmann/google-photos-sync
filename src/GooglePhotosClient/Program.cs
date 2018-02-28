@@ -10,6 +10,17 @@
     {
         public static void Main(string[] args)
         {
+            args = new[]
+            {
+                "ds",
+                "-b",
+                "C:\\",
+                "-c",
+                "client_secret.json",
+                "--since",
+                "2017-12-12"
+            };
+
             C.Console.WriteAscii(General.Name);
             var app = new CommandLineApplication
             {
@@ -33,9 +44,13 @@
                     CommandNames.BackupPathArgumentTemplate,
                     CommandNames.BackupPathArgumentDescription,
                     CommandOptionType.SingleValue);
+                var since = x.Option(
+                    CommandNames.SinceArgumentTemplate,
+                    CommandNames.SinceArgumentDescription,
+                    CommandOptionType.SingleValue);
                 x.OnExecute(() =>
                 {
-                    var command = new DownsyncCommand(clientSecretSavePath, clientSecretPath, backupPath);
+                    var command = new DownsyncCommand(clientSecretSavePath, clientSecretPath, backupPath, since);
                     return command.Validate() ? command.Execute() : -1;
                 });
                 x.HelpOption(CommandNames.Help);

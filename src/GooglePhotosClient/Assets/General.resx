@@ -129,6 +129,15 @@
   <data name="Downsync" xml:space="preserve">
     <value>Downsyncing...</value>
   </data>
+  <data name="Fetching" xml:space="preserve">
+    <value>Fetch files...</value>
+  </data>
+  <data name="GoogleDriveDateFormat" xml:space="preserve">
+    <value>yyyy-MM-ddTHH:mm:ss</value>
+  </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>Please provide a valid date</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Google Photos Client</value>
   </data>

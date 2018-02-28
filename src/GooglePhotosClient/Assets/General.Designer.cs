@@ -97,6 +97,33 @@ namespace GooglePhotosClient.Assets {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fetch files....
+        /// </summary>
+        internal static string Fetching {
+            get {
+                return ResourceManager.GetString("Fetching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yyyy-MM-ddTHH:mm:ss.
+        /// </summary>
+        internal static string GoogleDriveDateFormat {
+            get {
+                return ResourceManager.GetString("GoogleDriveDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide a valid date.
+        /// </summary>
+        internal static string InvalidDate {
+            get {
+                return ResourceManager.GetString("InvalidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google Photos Client.
         /// </summary>
         internal static string Name {
